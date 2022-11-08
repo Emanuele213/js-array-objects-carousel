@@ -5,60 +5,44 @@
 }
 
 body {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	height: 100vh;
 }
 
-.container-blur {
-	display: flex;
-	height: 100%;
-	backdrop-filter: blur(20px);
-}
-
 .slider {
-	margin: auto;
+	display: flex;
+	position: relative;
 	height: 80%;
 	width: 60%;
 	max-width: 600px;
-	max-height: 500px;
+	max-height: 400px;
 	background-color: salmon;
 }
 
-.slider .slider-viewer {
-	position: relative;
-	height: 80%;
-}
-
-.slider .controls {
-	position: absolute;
-	inset: 0;
+.controls {
 	display: flex;
 	justify-content: space-between;
+    flex-direction: column;
 	align-items: center;
-	height: 100%;
-	z-index: 10;
+	position: absolute;
+	inset: -50px;
 }
 
-.btn-left, .btn-right {
+.btn-up, .btn-down {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	margin: .5rem;
-	width: 3rem;
-	height: 3rem;
-	border-radius: 100%;
-	background-color: white;
+	font-size: 2rem;
 }
 
-.btn-left:hover, .btn-right:hover {
-	background-color: lightblue;
+.btn-up:hover, .btn-down:hover {
 	cursor: pointer;
 }
 
-.hidden {
-	visibility: hidden;
-}
-
-.slider .slider-img {
+.slider-img {
 	position: absolute;
 	inset: 0;
 	display: none;
@@ -68,26 +52,32 @@ body {
 	object-position: center;
 }
 
-.slider .slider-img.active {
+.active {
 	display: block;
 }
 
-.slider .thumbs {
-	position: relative;
+.img-right {
 	display: flex;
-	height: 20%;
+	flex-direction: column;
+	position: relative;
 }
 
-.slider .thumb-img {
-	flex: 1 0 0;
-	min-width: 0;
-	height: 100%;
+.img-size {
+	width: 142px;
+	height: 80px;
 	object-fit: cover;
 	object-position: center;
-	filter: brightness(.4);
+	filter: brightness(.5);
 }
 
-.slider .thumb-img.active {
-	border: 5px solid white;
+.card {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	height: 100%;
+	z-index: 10;
+}
+
+.overlay {
 	filter: brightness(1);
 }

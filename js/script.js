@@ -26,89 +26,81 @@ const arrImages = [
 	},
 ];
 
-const eleSliderViewer = document.querySelector('.slider-viewer');
-const eleSliderThumbs = document.querySelector('.thumbs');
-const eleBtnLeft = document.querySelector('.btn-left');
-const eleBtnRight = document.querySelector('.btn-right');
+const eleSlider = document.querySelector('.slider');
+const eleBtnBottom = document.querySelector('.btn-down');
+const eleBtnTop = document.querySelector('.btn-up');
+const eleOver = document.querySelector('.card');
 
-// creare i tag immagine nell'html
+// creaare i tag immagine nell'html
 for (let i = 0; i < arrImages.length; i++) {
-	// creare i tag immagine che va nella sezione grande .slider-viewer
 	const eleImg = document.createElement('img');
 	eleImg.src = `img/${arrImages[i].image}`;
 	eleImg.classList.add('slider-img');
+
 	if (i === 0) {
 		eleImg.classList.add('active');
 	}
-	eleSliderViewer.append(eleImg);
+	eleSlider.append(eleImg);
 
-	// creare i tag immagine che vanno nella sezione .thumbs
-	const eleThumb = document.createElement('img');
-	eleThumb.src = `img/${arrImages[i].image}`;
-	eleThumb.classList.add('thumb-img');
+	const eleCard = document.createElement('img');
+	eleCard.src = `img/${arrImages[i].image}`;
+	eleCard.classList.add('img-size');
 	if (i === 0) {
-		eleThumb.classList.add('active');
+		eleImg.classList.add('overlay');
 	}
-	eleSliderThumbs.append(eleThumb);
+	eleOver.append(eleCard);
 }
-// document.querySelector('.slider-img').classList.add('active');
 
 const listEleImg = document.querySelectorAll('.slider-img'); // non e' un array ma qualcosa di simile
-const listThumbs = document.querySelectorAll('.thumb-img');
+const listCard = document.querySelectorAll('.img-size');
 
 let activeIndex = 0;
-document.body.style.backgroundImage = `url('${arrImages[activeIndex]}')`;
-document.body.style.backgroundSize = 'cover';
 
 // aggiungere gli event listeners ai due bottoni
-eleBtnRight.addEventListener('click', function () {
+eleBtnBottom.addEventListener('click', function () {
 	// togliere la classe active dall'elemento attivo corrente
 	listEleImg[activeIndex].classList.remove('active');
-	listThumbs[activeIndex].classList.remove('active');
-
-	// incrementare l'active index con reset per slider infinito
-	/*
-	if (activeIndex === listEleImg.length - 1) {
-		activeIndex = 0;
-	} else {
-		activeIndex++;
+    listCard[activeIndex].classList.remove('overlay');
+	if (activeIndex == 4){
+		activeIndex = -1;
 	}
-	*/
-
+	// incrementare l'active index
 	activeIndex++;
-	if (activeIndex === listEleImg.length) {
-		activeIndex = 0;
-	}
 
 	// aggiungere la classe active all'elemento successivo
 	listEleImg[activeIndex].classList.add('active');
-	listThumbs[activeIndex].classList.add('active');
-	document.body.style.backgroundImage = `url('${arrImages[activeIndex]}')`;
-	document.body.style.backgroundSize = 'cover';
+    listCard[activeIndex].classList.add('overlay');
 });
 
-eleBtnLeft.addEventListener('click', function () {
+eleBtnTop.addEventListener('click', function () {
 	// togliere la classe active dall'elemento attivo corrente
 	listEleImg[activeIndex].classList.remove('active');
-	listThumbs[activeIndex].classList.remove('active');
-
-	// decrementare l'active index con reset per slider infinito
-	/*
-	if (activeIndex === 0) {
-		activeIndex = listEleImg.length - 1;
-	} else {
-		activeIndex--;
+    listCard[activeIndex].classList.remove('overlay');
+	if (activeIndex == 0){
+		activeIndex = 5;
 	}
-	*/
-
-	if (activeIndex === 0) {
-		activeIndex = listEleImg.length;
-	}
+	
+	// incrementare l'active index
 	activeIndex--;
 
 	// aggiungere la classe active all'elemento successivo
 	listEleImg[activeIndex].classList.add('active');
-	listThumbs[activeIndex].classList.add('active');
-	document.body.style.backgroundImage = `url('${arrImages[activeIndex]}')`;
-	document.body.style.backgroundSize = 'cover';
+    listCard[activeIndex].classList.add('overlay');
 });
+
+const nextImg = setInterval (imgNext, 3 * 1000);
+
+function imgNext () {
+    // togliere la classe active dall'elemento attivo corrente
+	listEleImg[activeIndex].classList.remove('active');
+    listCard[activeIndex].classList.remove('overlay');
+	if (activeIndex == 4){
+		activeIndex = -1;
+	}
+	// incrementare l'active index
+	activeIndex++;
+
+	// aggiungere la classe active all'elemento successivo
+	listEleImg[activeIndex].classList.add('active');
+    listCard[activeIndex].classList.add('overlay');
+}
