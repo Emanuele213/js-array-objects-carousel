@@ -53,6 +53,8 @@ for (let i = 0; i < arrImages.length; i++) {
 
 const listEleImg = document.querySelectorAll('.slider-img'); // non e' un array ma qualcosa di simile
 const listCard = document.querySelectorAll('.img-size');
+const eleBtn = document.querySelector('.mod-btn');
+const eleBtnReverse = document.querySelector('.mod-btn-reverse');
 
 let activeIndex = 0;
 
@@ -90,6 +92,17 @@ eleBtnTop.addEventListener('click', function () {
 
 const nextImg = setInterval (imgNext, 3 * 1000);
 
+
+eleBtn.addEventListener('click', function () {
+    eleStop ();
+});
+
+eleBtnReverse.addEventListener('click', function () {
+    const backImg = setInterval (Imgback, 3 * 1000);
+    eleStop ();
+    Imgback ();
+});
+
 function imgNext () {
     // togliere la classe active dall'elemento attivo corrente
 	listEleImg[activeIndex].classList.remove('active');
@@ -103,4 +116,24 @@ function imgNext () {
 	// aggiungere la classe active all'elemento successivo
 	listEleImg[activeIndex].classList.add('active');
     listCard[activeIndex].classList.add('overlay');
+}
+
+function Imgback () {
+    // togliere la classe active dall'elemento attivo corrente
+listEleImg[activeIndex].classList.remove('active');
+listCard[activeIndex].classList.remove('overlay');
+if (activeIndex == 0){
+    activeIndex = 5;
+}
+
+// incrementare l'active index
+activeIndex--;
+
+// aggiungere la classe active all'elemento successivo
+listEleImg[activeIndex].classList.add('active');
+listCard[activeIndex].classList.add('overlay');
+}
+
+function eleStop () {
+    clearInterval(nextImg);
 }

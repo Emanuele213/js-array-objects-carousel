@@ -5,10 +5,22 @@
 }
 
 body {
-	display: flex;
+	height: 100vh;
+}
+
+.container {
+    display: flex;
 	align-items: center;
 	justify-content: center;
-	height: 100vh;
+    height: 80%;
+}
+
+.container-down {
+    display: flex;
+    justify-content: center;
+    justify-content: space-evenly;
+    max-width: 300px;
+    margin: 0 auto;
 }
 
 .slider {
@@ -80,4 +92,24 @@ body {
 
 .overlay {
 	filter: brightness(1);
+}
+
+.mod-btn {
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    background-color: red;
+    color: white;
+    border: 0;
+    border-radius: 1rem;
+    font-size: 2rem;
+}
+
+.mod-btn-reverse {
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    background-color: blue;
+    color: white;
+    border: 0;
+    border-radius: 1rem;
+    font-size: 2rem;
 }
