@@ -31,27 +31,41 @@ const eleBtnBottom = document.querySelector('.btn-down');
 const eleBtnTop = document.querySelector('.btn-up');
 const eleOver = document.querySelector('.card');
 
+
 // creaare i tag immagine nell'html
 for (let i = 0; i < arrImages.length; i++) {
+	const eleDiv = document.createElement('div');
+	eleDiv.classList.add('selected');
+	const eleTitle = document.createElement('div');
+	eleTitle.classList.add('title');
 	const eleImg = document.createElement('img');
+	eleImg.classList.add('mod-img');
 	eleImg.src = `img/${arrImages[i].image}`;
-	eleImg.classList.add('slider-img');
 
+	eleTitle.innerHTML = `
+	<h2>${arrImages[i].title}</h2>
+	<p>${arrImages[i].text}</p>
+	`;
+	
 	if (i === 0) {
-		eleImg.classList.add('active');
+		eleDiv.classList.add('active');
 	}
-	eleSlider.append(eleImg);
+
+	eleSlider.append(eleDiv);
+	eleDiv.append(eleImg);
+	eleDiv.append(eleTitle);
 
 	const eleCard = document.createElement('img');
 	eleCard.src = `img/${arrImages[i].image}`;
 	eleCard.classList.add('img-size');
+
 	if (i === 0) {
-		eleImg.classList.add('overlay');
+		eleCard.classList.add('overlay');
 	}
+
 	eleOver.append(eleCard);
 }
-
-const listEleImg = document.querySelectorAll('.slider-img'); // non e' un array ma qualcosa di simile
+const listDiv = document.querySelectorAll('.selected');
 const listCard = document.querySelectorAll('.img-size');
 const eleBtn = document.querySelector('.mod-btn');
 const eleBtnReverse = document.querySelector('.mod-btn-reverse');
@@ -61,23 +75,26 @@ let activeIndex = 0;
 // aggiungere gli event listeners ai due bottoni
 eleBtnBottom.addEventListener('click', function () {
 	// togliere la classe active dall'elemento attivo corrente
-	listEleImg[activeIndex].classList.remove('active');
+	listDiv[activeIndex].classList.remove('active');
     listCard[activeIndex].classList.remove('overlay');
+
 	if (activeIndex == 4){
 		activeIndex = -1;
 	}
+
 	// incrementare l'active index
 	activeIndex++;
 
 	// aggiungere la classe active all'elemento successivo
-	listEleImg[activeIndex].classList.add('active');
+	listDiv[activeIndex].classList.add('active');
     listCard[activeIndex].classList.add('overlay');
 });
 
 eleBtnTop.addEventListener('click', function () {
 	// togliere la classe active dall'elemento attivo corrente
-	listEleImg[activeIndex].classList.remove('active');
+	listDiv[activeIndex].classList.remove('active');
     listCard[activeIndex].classList.remove('overlay');
+
 	if (activeIndex == 0){
 		activeIndex = 5;
 	}
@@ -86,7 +103,7 @@ eleBtnTop.addEventListener('click', function () {
 	activeIndex--;
 
 	// aggiungere la classe active all'elemento successivo
-	listEleImg[activeIndex].classList.add('active');
+	listDiv[activeIndex].classList.add('active');
     listCard[activeIndex].classList.add('overlay');
 });
 
@@ -105,8 +122,9 @@ eleBtnReverse.addEventListener('click', function () {
 
 function imgNext () {
     // togliere la classe active dall'elemento attivo corrente
-	listEleImg[activeIndex].classList.remove('active');
+	listDiv[activeIndex].classList.remove('active');
     listCard[activeIndex].classList.remove('overlay');
+
 	if (activeIndex == 4){
 		activeIndex = -1;
 	}
@@ -114,24 +132,25 @@ function imgNext () {
 	activeIndex++;
 
 	// aggiungere la classe active all'elemento successivo
-	listEleImg[activeIndex].classList.add('active');
+	listDiv[activeIndex].classList.add('active');
     listCard[activeIndex].classList.add('overlay');
 }
 
 function Imgback () {
     // togliere la classe active dall'elemento attivo corrente
-listEleImg[activeIndex].classList.remove('active');
-listCard[activeIndex].classList.remove('overlay');
-if (activeIndex == 0){
-    activeIndex = 5;
-}
+	listDiv[activeIndex].classList.remove('active');
+	listCard[activeIndex].classList.remove('overlay');
 
-// incrementare l'active index
-activeIndex--;
+	if (activeIndex == 0){
+		activeIndex = 5;
+	}
 
-// aggiungere la classe active all'elemento successivo
-listEleImg[activeIndex].classList.add('active');
-listCard[activeIndex].classList.add('overlay');
+	// incrementare l'active index
+	activeIndex--;
+
+	// aggiungere la classe active all'elemento successivo
+	listDiv[activeIndex].classList.add('active');
+	listCard[activeIndex].classList.add('overlay');
 }
 
 function eleStop () {
